@@ -45,7 +45,6 @@ export default function Header() {
     eth.useContainer();
   // Action menu open state
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-
   return (
     <div className={styles.header}>
       {/* Logo */}
@@ -68,7 +67,6 @@ export default function Header() {
               `${address.substr(0, 6)}...
                     ${address.slice(address.length - 4)}`}
         </button>
-
         {/* Actions button */}
         <button onClick={() => setMenuOpen((previous) => !previous)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

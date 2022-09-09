@@ -22,9 +22,6 @@ contract MerkleClaimERC20 is ERC20 {
   /// @notice Mapping of addresses who have claimed tokens
   mapping(address => bool) public hasClaimed;
 
-  /// ============ Errors ============
-
-  /// @notice Thrown if address has already claimed
   error AlreadyClaimed();
   /// @notice Thrown if address/amount are not part of Merkle tree
   error NotInMerkle();
