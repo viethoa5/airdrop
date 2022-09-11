@@ -2,8 +2,7 @@ import Link from "next/link"; // Dynamic routing
 import Image from "next/image"; // Images
 import { eth } from "state/eth"; // Global state
 import { useState } from "react"; // State management
-import styles from "styles/components/Header.module.scss"; // Component styles
-
+import styles from "styles/components/Header.module.scss"; // Component styles //
 /**
  * Links to render in action menu
  * @dev Does not render any links where url is undefined, allowing conditional rendering
@@ -11,7 +10,7 @@ import styles from "styles/components/Header.module.scss"; // Component styles
 const actionMenuLinks: {
   name: string;
   icon: string;
-  url: string | undefined;
+  url: string;
 }[] = [
   {
     name: "About",
@@ -32,6 +31,11 @@ const actionMenuLinks: {
     name: "GitHub",
     icon: "/icons/github.svg",
     url: process.env.NEXT_PUBLIC_GITHUB,
+  },
+  {
+    name: "Admin",
+    icon : "/icons/admin.svg",
+    url : process.env.NEXT_PUBLIC_ADMIN,
   },
 ];
 
@@ -67,6 +71,7 @@ export default function Header() {
               `${address.substr(0, 6)}...
                     ${address.slice(address.length - 4)}`}
         </button>
+
         {/* Actions button */}
         <button onClick={() => setMenuOpen((previous) => !previous)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

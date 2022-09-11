@@ -1,17 +1,18 @@
+import fs from "fs"; // Filesystem
+import path from "path"; // Path routing
+import data from "data"; //
+import MerkleTree from "merkletreejs";
+const airdrops: Record<string, number> = {};
 // Types
 type IConfig = {
   decimals: number;
   airdrop: Record<string, number>;
+  tree : MerkleTree;
 };
-
-// Config from generator
 const config: IConfig = {
   decimals: 18,
-  airdrop: {
-    "0x016C8780e5ccB32E5CAA342a926794cE64d9C364": 10,
-    "0x185a4dc360ce69bdccee33b3784b0282f7961aea": 100,
-  },
+  airdrop: data.airdrops,
+  tree : data.tree,
 };
-
 // Export config
 export default config;

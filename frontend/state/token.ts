@@ -5,7 +5,7 @@ import keccak256 from "keccak256"; // Keccak256 hashing
 import MerkleTree from "merkletreejs"; // MerkleTree.js
 import { useEffect, useState } from "react"; // React
 import { createContainer } from "unstated-next"; // State management
-
+import {mymerkleTree} from "merkle/merkle";
 /**
  * Generate Merkle Tree leaf from address and value
  * @param {string} address of airdrop claimee
@@ -21,20 +21,6 @@ function generateLeaf(address: string, value: string): Buffer {
     "hex"
   );
 }
-
-// Setup merkle tree
-const merkleTree = new MerkleTree(
-  // Generate leafs
-  Object.entries(config.airdrop).map(([address, tokens]) =>
-    generateLeaf(
-      ethers.utils.getAddress(address),
-      ethers.utils.parseUnits(tokens.toString(), config.decimals).toString()
-    )
-  ),
-  // Hashing function
-  keccak256,
-  { sortPairs: true }
-);
 
 function useToken() {
   // Collect global ETH state
@@ -118,12 +104,12 @@ function useToken() {
     // Generate hashed leaf from address
     const leaf: Buffer = generateLeaf(formattedAddress, numTokens);
     // Generate airdrop proof
-    const proof: string[] = merkleTree.getHexProof(leaf);
+    const proof: string[] = mymerkleTree.getHexProof(leaf);
 
     // Try to claim airdrop and refresh sync status
     try {
       const tx = await token.claim(formattedAddress, numTokens, proof);
-      await tx.wait(1);
+      await tx.wait(0.2);
       await syncStatus();
     } catch (e) {
       console.error(`Error when claiming tokens: ${e}`);
