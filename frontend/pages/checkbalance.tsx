@@ -1,4 +1,4 @@
-frontend/pages/login.jsimport { eth } from "state/eth"; // Global state: ETH
+import { eth } from "state/eth"; // Global state: ETH
 import { useState } from "react";
 import { checkbalance } from "state/usebalance";
 import Layout from "components/Layout"; // Layout wrapper
