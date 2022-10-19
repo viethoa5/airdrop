@@ -7,6 +7,7 @@ import { createContainer } from "unstated-next"; // State management
 import {mymerkleTree} from "merkle/merkle";
 function checkupdate() {
   // Collect global ETH state
+  var recentmerkleroot = 0x376fa5d6277fdfde75e4f511068e773997ae5d716348e692fcd38f0aaf800f8d;
   const {
     address,
     provider,
@@ -44,7 +45,10 @@ function checkupdate() {
     // Collect token contract
     const updateRoots: ethers.Contract = getContract();
     // Return claimed status
-    return await updateRoots.updateRoot(mymerkleTree.getHexRoot())
+    if (mymerkleTree.getHexRoot() != recentmerkleroot) {
+      return await updateRoots.updateRoot(mymerkleTree.getHexRoot());
+      recentmerkleroot = mymerkleTree.getHexRoot();
+    }
 };
 
   /**

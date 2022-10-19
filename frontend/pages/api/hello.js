@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 var airdrops;
 export default async function handler(req, res) {
   const configPath = path.join(__dirname, "../../../../data.json");
+  console.log(mymerkleTree.getHexRoot())
     airdrops = req.body;
 await fs.writeFileSync(
   // Output to merkle.json
